@@ -1,6 +1,14 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
+import { useGoldCounterStore } from './stores/goldcounter'
+
+const goldStore = useGoldCounterStore()
+
+onMounted(() => {
+  goldStore.startAutoIncrement()
+})
 </script>
 
 <template>
@@ -12,12 +20,7 @@ import Navbar from './components/Navbar.vue'
     <div class="main-columns">
 
       <div class="column">
-        <p>Resources</p>
-        <ul>
-          <li>Money</li>
-          <li>Materials</li>
-          <li>Settings</li>
-        </ul>
+        <p>Money: {{ goldStore.goldcounter }}</p>
       </div>
 
       <div class="column">
